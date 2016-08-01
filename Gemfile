@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.1.7'
 
+gem 'puma'
+
 gem 'rails_12factor'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
