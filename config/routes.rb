@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   post '/ping' => 'ping#show'
   get '/ping' => 'ping#show'
+
+  post '/challenges' => 'challenges#create'
+  post '/challenges/accept' => 'challenges#accept'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
