@@ -25,7 +25,7 @@ class Match < ActiveRecord::Base
   def only_open_match_or_challenge_in_channel?
     matches = Match.where(channel: channel, status: ['game_in_progress','challenge_open']).load
     unless matches.count == 0 || (id == matches.first.id)
-      errors.add(:channel, :game_running, "channel #{channel} has outstanding challenge or match")
+      errors[:base] << "channel #{channel} has outstanding challenge or match"
     end
   end
 end
