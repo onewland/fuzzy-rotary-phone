@@ -8,7 +8,7 @@ class Board
   end
 
   def self.from_descriptor(str)
-    Board.new(str.to_a)
+    Board.new(str.split(//))
   end
 
   def display

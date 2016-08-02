@@ -30,6 +30,6 @@ class Match < ActiveRecord::Base
   end
 
   def board_inst
-    @board_inst ||= Board.new(self.board)
+    @board_inst ||= Board.from_descriptor(self.board)
   end
 end
