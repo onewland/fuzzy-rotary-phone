@@ -5,7 +5,7 @@ class Challenge
 
   def self.accept_challenge(channel:, o_player:)
     match = Match.where(channel: channel, status: 'challenge_open')
-    match.accept(o_player)
+    match.accept_challenge(o_player)
   end
 
   def self.challenge_params(params)
