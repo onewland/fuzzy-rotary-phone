@@ -1,6 +1,6 @@
 class Board
   EMPTY_CHAR = "."
-  ROW_SEP = "\n`" + ("-" * 10) + "`\n"
+  ROW_SEP = "\n`" + ("-" * 9) + "`\n"
   attr_accessor :contents
 
   def initialize(contents)
