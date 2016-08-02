@@ -28,4 +28,8 @@ class Match < ActiveRecord::Base
       errors[:base] << "channel #{channel} has outstanding challenge or match"
     end
   end
+
+  def board_inst
+    @board_inst ||= Board.new(self.board)
+  end
 end
