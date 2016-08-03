@@ -3,7 +3,7 @@ class Match < ActiveRecord::Base
 
   validate :only_open_match_or_challenge_in_channel?
 
-  before_save :declare_winner
+  before_save :declare_winner, if: :game_in_progress?
 
   def declare_winner
     if win_char = board_inst.get_winner
@@ -18,6 +18,10 @@ class Match < ActiveRecord::Base
                  x_player: x_player,
                  o_player: o_player,
                  status: 'challenge_open')
+  end
+
+  def game_in_progress?
+    status == 'game_in_progress'
   end
 
   def accept_challenge(o_player)
