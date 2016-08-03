@@ -8,6 +8,7 @@ class Match < ActiveRecord::Base
   def declare_winner
     if win_char = board_inst.get_winner
       self.winner_char = win_char
+      self.winner_username = user_name(win_char)
       self.status = 'finished'
     end
   end
@@ -78,7 +79,7 @@ class Match < ActiveRecord::Base
     @board_inst ||= Board.from_descriptor(self.board)
   end
 
-  def current_user_name
-    current_turn == 'x' ? x_player : o_player
+  def user_name(char = current_turn)
+    char == 'x' ? x_player : o_player
   end
 end
