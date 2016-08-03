@@ -83,7 +83,11 @@ class Match < ActiveRecord::Base
     @board_inst ||= Board.from_descriptor(self.board)
   end
 
-  def user_name(char = current_turn)
+  def current_user_name
+    user_name(current_turn)
+  end
+
+  def user_name(char)
     char == 'x' ? x_player : o_player
   end
 end
