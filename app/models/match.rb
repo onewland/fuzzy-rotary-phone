@@ -32,7 +32,7 @@ class Match < ActiveRecord::Base
       raise "#{username} isn't playing"
     end
 
-    apply_move(char, position)
+    apply_move(player: char, position: position)
   end
 
   def apply_move(player:, position:)
