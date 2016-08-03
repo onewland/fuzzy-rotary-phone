@@ -28,7 +28,7 @@ class ChallengesController < ApplicationController
     end
   end
 
-  def abort
+  def abort_game
     @match = Match.where(
       status: 'game_in_progress',
       channel: params[:channel_name]
