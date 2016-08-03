@@ -24,9 +24,9 @@ class Match < ActiveRecord::Base
 
   def user_attempt_move(username:, position:)
     char = '*'
-    if(x_player == username)
+    if x_player == username
       char = 'x'
-    elsif (o_player == username)
+    elsif o_player == username
       char = 'o'
     else
       raise "#{username} isn't playing"
@@ -54,6 +54,11 @@ class Match < ActiveRecord::Base
     unless matches.count == 0 || (id == matches.first.id)
       errors[:base] << "channel #{channel} has outstanding challenge or match"
     end
+  end
+
+  def abort_game
+    self.status = 'aborted'
+    save
   end
 
   def board_inst
