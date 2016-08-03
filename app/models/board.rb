@@ -1,6 +1,24 @@
 class Board
   EMPTY_CHAR = "."
   ROW_SEP = "\n`" + ("-" * 9) + "`\n"
+
+  # if contents at any triplet of indices contains the same character, that
+  # is a win condition
+  WIN_CONDITIONS = [
+    # rows
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    # columns
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    # diagonals
+    [0,4,8],
+    [2,4,6]
+  ]
+
+
   attr_accessor :contents
 
   def initialize(contents)
@@ -22,6 +40,17 @@ class Board
     else
       raise "Space taken"
     end
+  end
+
+  def get_winner
+    WIN_CONDITIONS.map do |triplet|
+      triplet.map do |idx|
+        contents[idx]
+      end
+    end.detect do |subset|
+      subset[0] == subset[1] &&
+      subset[1] == subset[2] && subset[0] != "."
+    end.try(:first)
   end
 
   def to_match_board_repr

@@ -3,6 +3,15 @@ class Match < ActiveRecord::Base
 
   validate :only_open_match_or_challenge_in_channel?
 
+  before_save :declare_winner
+
+  def declare_winner
+    if win_char = board_inst.get_winner
+      self.winner_char = win_char
+      self.status = 'finished'
+    end
+  end
+
   def self.challenge(channel:, x_player:, o_player:)
     Match.create(channel: channel,
                  x_player: x_player,
@@ -50,7 +59,11 @@ class Match < ActiveRecord::Base
   end
 
   def only_open_match_or_challenge_in_channel?
-    matches = Match.where(channel: channel, status: ['game_in_progress','challenge_open']).load
+    matches = Match.where(
+      channel: channel,
+      status: ['game_in_progress','challenge_open']
+    ).load
+
     unless matches.count == 0 || (id == matches.first.id)
       errors[:base] << "channel #{channel} has outstanding challenge or match"
     end
