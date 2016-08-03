@@ -4,13 +4,30 @@ class Match < ActiveRecord::Base
   validate :only_open_match_or_challenge_in_channel?
 
   before_save :declare_winner, if: :game_in_progress?
+  before_save :declare_stalemate, if: :game_in_progress?
 
   def declare_winner
     if win_char = board_inst.get_winner
       self.winner_char = win_char
       self.winner_username = user_name(win_char)
       self.status = 'finished'
+      self.declaration = "#{winner_username} is the winner!"
     end
+  end
+
+  def declare_stalemate
+    if !win_char && turns_taken_count == 9
+      self.status = 'stalemate'
+      self.declaration = "The game is a tie."
+    end
+  end
+
+  def declaration
+    @declaration
+  end
+
+  def declaration=(d)
+    @declaration = d
   end
 
   def self.challenge(channel:, x_player:, o_player:)
@@ -56,6 +73,7 @@ class Match < ActiveRecord::Base
         self.board = board_inst.apply_move(player, position).to_match_board_repr
         @board_inst = Board.from_descriptor(self.board)
         self.current_turn = (player == 'x' ? 'o' : 'x')
+        self.turns_taken_count += 1
         save!
       else
         raise "Wrong player's turn"

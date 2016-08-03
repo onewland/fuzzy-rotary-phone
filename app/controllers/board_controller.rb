@@ -24,7 +24,11 @@ class BoardController < ApplicationController
     channel_output = "#{player_attempt_move} made their move.\n"
     channel_output << @match.board_inst.display
     channel_output << "\n"
-    channel_output << "It is now #{@match.current_user_name}'s turn\n"
+    if @match.declaration
+      channel_output << @match.declaration
+    else
+      channel_output << "It is now #{@match.current_user_name}'s turn\n"
+    end
 
     render json: {
       response_type: 'in_channel',
