@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   post '/challenges/accept' => 'challenges#accept'
 
   get '/board' => 'board#show'
+  post '/board/move' => 'board#move'
 end

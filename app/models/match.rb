@@ -22,11 +22,25 @@ class Match < ActiveRecord::Base
     end
   end
 
+  def user_attempt_move(username:, position:)
+    char = '*'
+    if(x_player == username)
+      char = 'x'
+    elsif (o_player == username)
+      char = 'o'
+    else
+      raise "#{username} isn't playing"
+    end
+
+    apply_move(char, position)
+  end
+
   def apply_move(player:, position:)
     position -= 1 # Assume 1-indexed player-given position
     with_lock do
       if current_turn == player
         self.board = board_inst.apply_move(player, position).to_match_board_repr
+        @board_inst = Board.from_descriptor(self.board)
         self.current_turn = (player == 'x' ? 'o' : 'x')
         save!
       else
