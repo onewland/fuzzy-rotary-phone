@@ -19,9 +19,10 @@ class ChallengesController < ApplicationController
     if challenge.errors.empty?
       render json: {
         response_type: "in_channel",
-        text: "@#{challenge.o_player} has accepted @#{challenge.x_player}'s tic-tac-toe challenge.
-               To accept, run /ttt-accept"
+        text: "@#{challenge.o_player} has accepted @#{challenge.x_player}'s tic-tac-toe challenge."
       }
+    elsif !challenge.present?
+      raise "not implemented yet"
     else
       render json: { text: challenge.errors.full_messages.join("\n") }
     end
