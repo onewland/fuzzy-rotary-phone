@@ -11,6 +11,23 @@ class Board
     Board.new(str.split(//))
   end
 
+  def valid_move?(n)
+    n >= 0 && n < 9 && contents[n] == EMPTY_CHAR
+  end
+
+  def apply_move(char, n)
+    if valid_move?(n)
+      contents[n] = char
+      self
+    else
+      raise "Space taken"
+    end
+  end
+
+  def to_match_board_repr
+    contents.join("")
+  end
+
   def display
     display_rows = []
     contents.each_slice(3) do |c_row|
