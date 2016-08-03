@@ -22,6 +22,19 @@ class Match < ActiveRecord::Base
     end
   end
 
+  def apply_move(player:, position:)
+    position -= 1 # Assume 1-indexed player-given position
+    with_lock do
+      if current_turn == player
+        self.board = board_inst.apply_move(player, position).to_match_board_repr
+        self.current_turn = (player == 'x' ? 'o' : 'x')
+        save!
+      else
+        raise "Wrong player's turn"
+      end
+    end
+  end
+
   def only_open_match_or_challenge_in_channel?
     matches = Match.where(channel: channel, status: ['game_in_progress','challenge_open']).load
     unless matches.count == 0 || (id == matches.first.id)
@@ -31,5 +44,9 @@ class Match < ActiveRecord::Base
 
   def board_inst
     @board_inst ||= Board.from_descriptor(self.board)
+  end
+
+  def current_user_name
+    current_turn == 'x' ? x_player : o_player
   end
 end
