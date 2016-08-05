@@ -17,12 +17,14 @@ class ChallengesController < ApplicationController
     channel = params[:channel_name]
     challenge = Challenge.accept_challenge(channel: channel, o_player: o_player)
     if challenge.errors.empty?
+      channel_output = "It is currently #{@match.current_user_name}'s turn\n"
+      channel_output << @match.board_inst.display
+
       render json: {
-        response_type: "in_channel",
-        text: "@#{challenge.o_player} has accepted @#{challenge.x_player}'s tic-tac-toe challenge."
+        response_type: 'in_channel',
+        text: channel_output
       }
     elsif !challenge.present?
-      raise "not implemented yet"
     else
       render json: { text: challenge.errors.full_messages.join("\n") }
     end
