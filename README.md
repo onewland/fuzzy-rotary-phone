@@ -32,6 +32,8 @@ can be one of:
 - stalemate
 - aborted
 
-A match flows from challenge_open to either game_in_progress or aborted
+A match flows from challenge_open to either game_in_progress (if the challenge
+is accepted with `/ttt accept`) or aborted (with `/ttt abort`).
+
 Once it reaches game_in_progress it can flow to finished, stalemate
-or aborted depending on either moves or `/ttt abort`.
+or aborted depending on either moves (`/ttt move`) or `/ttt abort`.
