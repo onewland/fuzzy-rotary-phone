@@ -9,7 +9,8 @@ class CommandDelegator
     'challenge' => Commands::IssueChallenge,
     'accept' => Commands::AcceptChallenge,
     'move' => Commands::Move,
-    'board' => Commands::ShowBoard
+    'board' => Commands::ShowBoard,
+    'help' => Commands::Help
   }
 
   def self.split_text(text)
