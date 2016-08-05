@@ -1,13 +1,13 @@
 # fuzzy-rotary-phone
 Tic-Tac-Toe Slack bot Integration
 
-# Setup
+## Setup
 Push to heroku.
 Run `heroku run rake db:create db:migrate.`
 Set ENV['SLACK_TTT_COMMAND_TOKEN'] to the token for your /-command
 configuration.
 
-# Usage as Slack user
+## Usage as Slack user
 /ttt help display this message
 
 /ttt challenge [player name] -- challenges [player name] to a game
@@ -23,7 +23,7 @@ configuration.
 
 /ttt abort -- end a game or waiting challenge
 
-# Schema
+## Schema
 The table `matches` contains all match information. The state
 can be one of:
 - challenge_open
