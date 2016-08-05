@@ -50,10 +50,10 @@ class Match < ActiveRecord::Base
       self.accepted_at = Time.now
       self.board = "........."
       save
-      return self
     else
       errors.add(:base, "#{o_player} was not challenged to a match")
     end
+    return self
   end
 
   def user_attempt_move(username:, position:)
