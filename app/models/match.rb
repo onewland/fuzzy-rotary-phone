@@ -52,7 +52,7 @@ class Match < ActiveRecord::Base
       save
       return self
     else
-      errors.add(:o_player, :not_challenged, "#{o_player} was not challenged to a match")
+      errors.add(:base, "#{o_player} was not challenged to a match")
     end
   end
 

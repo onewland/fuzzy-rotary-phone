@@ -3,6 +3,7 @@ module Commands
     def execute
       o_player = @ctx[:user_name]
       channel = @ctx[:channel_name]
+      Rails.logger.info("ctx = #{@ctx.inspect}, o_player = #{o_player.inspect}, channel = #{channel.inspect}")
 
       begin
         challenge = Challenge.accept_challenge(channel: channel, o_player: o_player)
