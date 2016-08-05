@@ -17,7 +17,8 @@ class ChallengesController < ApplicationController
     channel = params[:channel_name]
     challenge = Challenge.accept_challenge(channel: channel, o_player: o_player)
     if challenge.errors.empty?
-      channel_output = "It is currently #{challenge.current_user_name}'s turn\n"
+      channel_output = "#{challenge.o_player} has accepted #{challenge.x_player}'s challenge'"
+      channel_output << "It is currently #{challenge.current_user_name}'s turn\n"
       channel_output << challenge.board_inst.display
 
       render json: {
