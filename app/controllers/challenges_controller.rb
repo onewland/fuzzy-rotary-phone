@@ -30,10 +30,10 @@ class ChallengesController < ApplicationController
 
   def abort_game
     @match = Match.where(
-      status: 'game_in_progress',
+      status: ['game_in_progress','challenge_open'],
       channel: params[:channel_name]
     ).first
     @match.abort_game
-    render json: { text: "ended game of #{match.x_player} vs. #{match.o_player}"}
+    render json: { text: "ended game/challenge of #{@match.x_player} vs. #{@match.o_player}"}
   end
 end
