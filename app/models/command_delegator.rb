@@ -4,7 +4,8 @@ class CommandDelegator
   class CommandNotFound < StandardError; end
 
   COMMANDS = {
-    'echo' => Commands::Echo
+    'echo' => Commands::Echo,
+    'abort' => Commands::Abort
   }
 
   def self.split_text(text)
