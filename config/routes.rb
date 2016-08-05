@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   get '/board' => 'board#show'
   post '/board/move' => 'board#move'
+
+  post '/ttt/ingest' => 'ttt#ingest'
 end
