@@ -1,4 +1,4 @@
-class TTTController < ApplicationController
+class TttController < ApplicationController
   before_filter :verify_token
 
   def ingest
