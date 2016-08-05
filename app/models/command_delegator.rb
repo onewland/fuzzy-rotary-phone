@@ -7,7 +7,8 @@ class CommandDelegator
     'echo' => Commands::Echo,
     'abort' => Commands::Abort,
     'challenge' => Commands::IssueChallenge,
-    'accept' => Commands::AcceptChallenge
+    'accept' => Commands::AcceptChallenge,
+    'move' => Commands::Move
   }
 
   def self.split_text(text)
