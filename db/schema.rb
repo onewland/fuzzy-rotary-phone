@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801201141) do
+ActiveRecord::Schema.define(version: 20160805211423) do
 
   create_table "matches", force: :cascade do |t|
     t.string   "x_player",                        null: false
@@ -27,5 +27,7 @@ ActiveRecord::Schema.define(version: 20160801201141) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
+
+  add_index "matches", ["channel", "status"], name: "index_matches_on_channel_and_status"
 
 end
