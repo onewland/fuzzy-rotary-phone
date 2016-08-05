@@ -45,5 +45,6 @@ with state challenge_open or game_in_progress in the current channel.
 A match flows from challenge_open to either game_in_progress (if the challenge
 is accepted with `/ttt accept`) or aborted (with `/ttt abort`).
 
-Once it reaches game_in_progress it can flow to finished, stalemate
-or aborted depending on either moves (`/ttt move`) or `/ttt abort`.
+Once a match reaches game_in_progress it can transition to finished, stalemate
+or aborted depending on either the outcome of moves (`/ttt move`) or
+`/ttt abort`.
