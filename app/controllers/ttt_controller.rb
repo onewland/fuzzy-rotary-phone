@@ -2,7 +2,11 @@ class TttController < ApplicationController
   before_filter :verify_token
 
   def ingest
-    render json: CommandDelegator.evaluate(params).to_hash
+    begin
+      render json: CommandDelegator.evaluate(params).to_hash
+    rescue CommandDelegator::CommandNotFound
+      render json: { text: "That command not recognized. Try /ttt help for help" }
+    end
   end
 
   private
