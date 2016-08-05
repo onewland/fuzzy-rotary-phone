@@ -18,11 +18,13 @@ configuration.
 
 /ttt move [1-9] -- place your marker in squares 1 through 9, going
    left to right and top to bottom
-   `1 | 2 | 3`
-   `---------`
-   `4 | 5 | 6`
-   `---------`
-   `7 | 8 | 9`
+   ```
+   1 | 2 | 3
+   ---------
+   4 | 5 | 6
+   ---------
+   7 | 8 | 9
+   ```
 
 /ttt abort -- end a game or waiting challenge
 
