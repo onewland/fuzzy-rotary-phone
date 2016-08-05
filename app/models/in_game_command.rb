@@ -2,7 +2,7 @@ class InGameCommand < Command
   def get_match
     @match = Match.where(
       status: 'game_in_progress',
-      channel: params[:channel_name]
+      channel: @ctx[:channel_name]
     ).first
   end
 
