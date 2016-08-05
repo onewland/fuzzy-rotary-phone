@@ -8,11 +8,14 @@ Set ENV['SLACK_TTT_COMMAND_TOKEN'] to the token for your /-command
 configuration.
 
 ## Usage as Slack user
-/ttt help display this message
+/ttt display in-game help message
 
 /ttt challenge [player name] -- challenges [player name] to a game
+
 /ttt accept -- accept a challenge issued by another player
+
 /ttt board -- see current board, whose turn it is
+
 /ttt move [1-9] -- place your marker in squares 1 through 9, going
    left to right and top to bottom
    `1 | 2 | 3`
