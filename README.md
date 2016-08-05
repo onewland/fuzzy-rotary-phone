@@ -2,9 +2,10 @@
 Tic-Tac-Toe Slack bot Integration
 
 ## Setup
-Push to heroku.
-Run `heroku run rake db:create db:migrate.`
-Set ENV['SLACK_TTT_COMMAND_TOKEN'] to the token for your /-command
+
+1. Push to heroku.
+1. Run `heroku run rake db:create db:migrate.`
+1. Set ENV['SLACK_TTT_COMMAND_TOKEN'] to the token for your /-command
 configuration.
 
 ## Usage as Slack user
