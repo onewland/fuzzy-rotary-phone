@@ -1,5 +1,7 @@
 class Match < ActiveRecord::Base
   class PlayerNotInMatch < StandardError; end
+  class TurnOutOfOrder < StandardError; end
+
   validates_presence_of :channel, :x_player, :o_player
 
   validate :only_open_match_or_challenge_in_channel?
@@ -77,7 +79,7 @@ class Match < ActiveRecord::Base
         self.turns_taken_count += 1
         save!
       else
-        raise "Wrong player's turn"
+        raise TurnOutOfOrder.new(player)
       end
     end
   end
