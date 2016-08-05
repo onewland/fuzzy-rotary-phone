@@ -12,7 +12,7 @@ class Challenge
     {
       channel: params[:channel_name],
       x_player: params[:user_name],
-      o_player: params[:text]
+      o_player: params[:text].strip.delete('@')
     }
   end
 end
