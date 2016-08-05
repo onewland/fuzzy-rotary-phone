@@ -41,29 +41,58 @@ describe Match, type: :model do
 
   context "gameplay" do
     describe '#apply_move' do
-      let(:match) {
-        Match.new(
-          channel: 'abc',
-          status: 'game_in_progress',
-          board: '.........',
-          x_player: 'x_person',
-          o_player: 'o_person'
-         )
-      }
+      context "happy path" do
+        let(:match) {
+          Match.new(
+            channel: 'abc',
+            status: 'game_in_progress',
+            board: '.........',
+            x_player: 'x_person',
+            o_player: 'o_person'
+           )
+        }
 
-      before do
-        expect(match.turns_taken_count).to eq(0)
-        expect(match.current_turn).to eq('x')
+        before do
+          expect(match.turns_taken_count).to eq(0)
+          expect(match.current_turn).to eq('x')
 
-        match.apply_move(player: 'x', position: 1)
+          match.apply_move(player: 'x', position: 1)
+        end
+
+        it "changes turn count if move is valid" do
+          expect(match.turns_taken_count).to eq(1)
+        end
+
+        it "changes player turn if move is valid" do
+          expect(match.current_turn).to eq('o')
+        end
       end
 
-      it "changes turn count if move is valid" do
-        expect(match.turns_taken_count).to eq(1)
-      end
+      context "wrong turn" do
+        let(:match) {
+          Match.new(
+            channel: 'abc',
+            status: 'game_in_progress',
+            board: '..x......',
+            x_player: 'x_person',
+            o_player: 'o_person'
+           )
+        }
 
-      it "changes player turn if move is valid" do
-        expect(match.current_turn).to eq('o')
+        before do
+          expect(match.turns_taken_count).to eq(0)
+          expect(match.current_turn).to eq('x')
+
+          expect { match.apply_move(player: 'o', position: 1) }.to raise_error(Match::TurnOutOfOrder)
+        end
+
+        it "does not change current turn" do
+          expect(match.current_turn).to eq('x')
+        end
+
+        it "does not change turns taken count" do
+          expect(match.turns_taken_count).to eq(0)
+        end
       end
     end
   end
