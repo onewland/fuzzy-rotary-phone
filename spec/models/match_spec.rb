@@ -38,4 +38,48 @@ describe Match, type: :model do
       end
     end
   end
+
+  context "gameplay" do
+    describe "apply_move" do
+      
+    end
+  end
+
+  context "game ending conditions" do
+    describe '#declare_winner' do
+      let(:xp) { 'playerX' }
+      let(:op) { 'playerO' }
+      let(:match) { Match.new(
+        status: 'game_in_progress',
+        board: 'xxx......',
+        x_player: xp,
+        o_player: op)
+      }
+      let(:winner_char) { 'x' }
+
+      before do
+        expect(match.board_inst).to receive(:get_winner).and_return(winner_char)
+      end
+
+      it "transitions to win" do
+        match.declare_winner
+        expect(match.winner_char).to eq(winner_char)
+        expect(match.status).to eq('finished')
+      end
+    end
+
+    describe 'declare_stalemate' do
+      let(:match) { Match.new(
+          status: 'game_in_progress',
+          board: 'xoxxoxoxo',
+          turns_taken_count: 9
+        )
+      }
+
+      it "declares stalemate" do
+        match.declare_stalemate
+        expect(match.status).to eq('stalemate')
+      end
+    end
+  end
 end
