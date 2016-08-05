@@ -6,7 +6,7 @@ class Challenge
 
   def self.accept_challenge(channel:, o_player:)
     match = Match.where(channel: channel, status: 'challenge_open').first
-    return ChallengeNotFound unless match
+    raise ChallengeNotFound unless match
     match.accept_challenge(o_player)
   end
 
