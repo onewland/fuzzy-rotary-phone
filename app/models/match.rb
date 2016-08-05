@@ -16,7 +16,7 @@ class Match < ActiveRecord::Base
   end
 
   def declare_stalemate
-    if !win_char && turns_taken_count == 9
+    if !board_inst.get_winner && turns_taken_count == 9
       self.status = 'stalemate'
       self.declaration = "The game is a tie."
     end
