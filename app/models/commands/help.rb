@@ -20,7 +20,7 @@ I accept the following commands:
 
 /ttt abort -- end a game or waiting challenge
 }
-    ::CommandResponse.new(help_text)
+    ::CommandResponse.new(text: help_text)
     end
   end
 end
