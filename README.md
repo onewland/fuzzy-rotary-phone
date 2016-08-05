@@ -24,13 +24,18 @@ configuration.
 /ttt abort -- end a game or waiting challenge
 
 ## Schema
-The table `matches` contains all match information. The state
-can be one of:
+The table `matches` contains all match information.
+
+Flow can be followed via the states (`status` column).
+The state can be one of:
 - challenge_open
 - game_in_progress
 - finished
 - stalemate
 - aborted
+
+`/ttt challenge` creates a match in state challenge_open, if there is no match
+with state challenge_open or game_in_progress in the current channel.
 
 A match flows from challenge_open to either game_in_progress (if the challenge
 is accepted with `/ttt accept`) or aborted (with `/ttt abort`).
