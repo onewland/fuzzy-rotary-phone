@@ -1,4 +1,4 @@
-module Help
+module Commands
   class Help < Command
     def execute
       help_text = %Q{
