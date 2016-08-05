@@ -1,4 +1,6 @@
 class Board
+  class BoardSpaceTaken < StandardError; end
+  
   EMPTY_CHAR = "."
   ROW_SEP = "\n`" + ("-" * 9) + "`\n"
 
@@ -38,7 +40,7 @@ class Board
       contents[n] = char
       self
     else
-      raise "Space taken"
+      raise BoardSpaceTaken.new(n)
     end
   end
 

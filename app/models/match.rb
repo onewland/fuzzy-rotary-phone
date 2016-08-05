@@ -1,4 +1,5 @@
 class Match < ActiveRecord::Base
+  class PlayerNotInMatch < StandardError; end
   validates_presence_of :channel, :x_player, :o_player
 
   validate :only_open_match_or_challenge_in_channel?
@@ -60,7 +61,7 @@ class Match < ActiveRecord::Base
     elsif o_player == username
       char = 'o'
     else
-      raise "#{username} isn't playing"
+      raise PlayerNotInMatch.new(username)
     end
 
     apply_move(player: char, position: position)
