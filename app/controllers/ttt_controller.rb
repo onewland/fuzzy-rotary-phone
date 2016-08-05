@@ -2,7 +2,7 @@ class TttController < ApplicationController
   before_filter :verify_token
 
   def ingest
-    render json: { text: 'Hello from ingest' }
+    render json: CommandDelegator.evaluate(params).to_hash
   end
 
   private
