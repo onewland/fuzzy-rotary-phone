@@ -36,13 +36,4 @@ class ChallengesController < ApplicationController
       render json: { text: "No challenge to accept in this channel." }
     end
   end
-
-  def abort_game
-    @match = Match.where(
-      status: ['game_in_progress','challenge_open'],
-      channel: params[:channel_name]
-    ).first
-    @match.abort_game
-    render json: { text: "ended game/challenge of #{@match.x_player} vs. #{@match.o_player}"}
-  end
 end
